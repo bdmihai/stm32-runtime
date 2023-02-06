@@ -40,6 +40,7 @@ Product {
         'printf/*.c',
         'printf/*.h',
         'stdio/*.c',
+        'malloc/*.c',
         '*.c'
     ]
 

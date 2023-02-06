@@ -27,6 +27,7 @@
 
 #include <stdio.h>
 #include <stdbool.h>
+#include <stdarg.h>
 
 /**
  * Runtime initialization.
@@ -106,13 +107,21 @@ void exit(int status)
 
 void __attribute__((noreturn)) __printflike(1, 0) panic(__unused const char *fmt, ...) 
 {
+    puts("\n*** PANIC ***\n");
+    if (fmt) {
+        va_list args;
+        va_start(args, fmt);
+        vprintf(fmt, args);
+        va_end(args);
+        puts("\n");
+    }
     _exit(1);
 }
 
 void __assert_func(__unused const char *file, __unused int line, __unused const char *func, __unused const char *failedexpr) {
-    //printf("assertion \"%s\" failed: file \"%s\", line %d%s%s\n",
-    //       failedexpr, file, line, func ? ", function: " : "",
-    //       func ? func : "");
+    printf("assertion \"%s\" failed: file \"%s\", line %d%s%s\n",
+           failedexpr, file, line, func ? ", function: " : "",
+           func ? func : "");
 
     _exit(1);
 }
