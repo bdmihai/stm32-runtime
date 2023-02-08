@@ -34,17 +34,37 @@
 #define WRAPPER_FUNC(x) __wrap_ ## x
 #define REAL_FUNC(x) __real_ ## x
 
+void send_char(char c)
+{
+    (void)c;
+    __asm volatile("svc 55":::);
+}
+
+uint32_t check_received_char()
+{
+    uint32_t ret;
+    __asm volatile("svc 56": "=r" (ret) ::);
+    return ret;
+}
+
+char receive_char()
+{
+    char ret;
+    __asm volatile("svc 57": "=r" (ret) ::);
+    return ret;
+}
+
 int WRAPPER_FUNC(putchar)(int c) {
-    ITM_SendChar(c);
+    send_char(c);
     return c;
 }
 
 int WRAPPER_FUNC(puts)(const char *s) {
     int len = (int)strlen(s);
     for (int i = 0; i < len; i++) {
-        ITM_SendChar(s[i]);
+        send_char(s[i]);
     }
-    ITM_SendChar('\n');
+    send_char('\n');
     return len;
 }
 
@@ -64,6 +84,6 @@ int __printflike(1, 0) WRAPPER_FUNC(printf)(const char* format, ...)
 int WRAPPER_FUNC(getchar)(void) 
 {
     /* wait for a char */
-    while (!ITM_CheckChar()) {}
-    return ITM_ReceiveChar();
+    while (!check_received_char()) {}
+    return receive_char();
 }
