@@ -27,6 +27,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdint.h>
 
 extern void *__real_malloc(size_t size);
 extern void *__real_calloc(size_t count, size_t size);
