@@ -28,8 +28,9 @@
 #include <stdlib.h>
 #include <stdarg.h>
 #include <string.h>
-#include "printf.h"
+
 #include "stm32f4xx.h"
+#include "../printf/printf.h"
 
 #define WRAPPER_FUNC(x) __wrap_ ## x
 #define REAL_FUNC(x) __real_ ## x
