@@ -28,6 +28,10 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdarg.h>
+#include <stdint.h>
+#include <string.h>
+
+#include "stm32f4xx.h"
 
 /**
  * Runtime initialization.
@@ -60,6 +64,15 @@ void runtime_init(void)
     for (void (**p)(void) = &__init_array_start; p < &__init_array_end; ++p) {
         (*p)();
     }
+
+    // Start and end position of the ram vector table location
+    // defined by the linker script.
+    extern char __ram_isr_vector_start;
+    extern char __ram_isr_vector_end;
+
+    // set-up the vector table in ram
+    __builtin_memcpy(&__ram_isr_vector_start, (char *) SCB->VTOR, &__ram_isr_vector_end - &__ram_isr_vector_start);
+    SCB->VTOR = (uintptr_t) &__ram_isr_vector_start;
 }
 
 /**
