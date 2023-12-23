@@ -65,14 +65,9 @@ void runtime_init(void)
         (*p)();
     }
 
-    // Start and end position of the ram vector table location
-    // defined by the linker script.
-    extern char __ram_isr_vector_start;
-    extern char __ram_isr_vector_end;
-
     // set-up the vector table in ram
-    __builtin_memcpy(&__ram_isr_vector_start, (char *) SCB->VTOR, &__ram_isr_vector_end - &__ram_isr_vector_start);
-    SCB->VTOR = (uintptr_t) &__ram_isr_vector_start;
+    extern char __isr_vector_start;
+    SCB->VTOR = (uintptr_t) &__isr_vector_start;
 }
 
 /**

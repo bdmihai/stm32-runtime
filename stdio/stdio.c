@@ -21,15 +21,15 @@
  | THE USE OR OTHER DEALINGS IN THE SOFTWARE.                                 |
  |____________________________________________________________________________|
  |                                                                            |
- |  Author: Mihai Baneu                           Last modified: 05.Feb.2023  |
+ |  Author: Mihai Baneu                           Last modified: 23.Dec.2023  |
  |                                                                            |
  |___________________________________________________________________________*/
 
 #include <stdlib.h>
 #include <stdarg.h>
 #include <string.h>
+#include <stdint.h>
 
-#include "stm32f4xx.h"
 #include "../printf/printf.h"
 
 #define WRAPPER_FUNC(x) __wrap_ ## x
