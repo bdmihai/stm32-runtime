@@ -46,7 +46,7 @@ Product {
     Export {
         Depends { name: 'stm32' }
         
-        stm32.includePaths: [ FileInfo.joinPaths(exportingProduct.sourceDirectory, '/printf') ]
+        stm32.includePaths: [ FileInfo.joinPaths(exportingProduct.sourceDirectory, 'printf') ]
         stm32.libraryPaths: [ exportingProduct.destinationDirectory, exportingProduct.sourceDirectory ]
         stm32.linkerFlags: [ 
             '-Wl,--wrap=malloc', 
