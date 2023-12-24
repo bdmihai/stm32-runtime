@@ -21,7 +21,7 @@
  | THE USE OR OTHER DEALINGS IN THE SOFTWARE.                                 |
  |____________________________________________________________________________|
  |                                                                            |
- |  Author: Mihai Baneu                           Last modified: 05.Feb.2023  |
+ |  Author: Mihai Baneu                           Last modified: 24.Dec.2023  |
  |                                                                            |
  |___________________________________________________________________________*/
  
@@ -32,7 +32,6 @@ Product {
     type: 'lib'
 
     Depends { name: 'stm32' }
-    //Depends { name: "cmsis" }
 
     stm32.includePaths: [ 'printf' ]
 
@@ -46,7 +45,6 @@ Product {
 
     Export {
         Depends { name: 'stm32' }
-        //Depends { name: 'cmsis' }
         
         stm32.includePaths: [ FileInfo.joinPaths(exportingProduct.sourceDirectory, '/printf') ]
         stm32.libraryPaths: [ exportingProduct.destinationDirectory, exportingProduct.sourceDirectory ]
