@@ -31,8 +31,6 @@
 #include <stdint.h>
 #include <string.h>
 
-#include "stm32f4xx.h"
-
 /**
  * Runtime initialization.
 */
@@ -64,10 +62,6 @@ void runtime_init(void)
     for (void (**p)(void) = &__init_array_start; p < &__init_array_end; ++p) {
         (*p)();
     }
-
-    // set-up the vector table in ram
-    extern char __isr_vector_start;
-    SCB->VTOR = (uintptr_t) &__isr_vector_start;
 }
 
 /**

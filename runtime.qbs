@@ -32,7 +32,7 @@ Product {
     type: 'lib'
 
     Depends { name: 'stm32' }
-    Depends { name: "cmsis" }
+    //Depends { name: "cmsis" }
 
     stm32.includePaths: [ 'printf' ]
 
@@ -46,7 +46,7 @@ Product {
 
     Export {
         Depends { name: 'stm32' }
-        Depends { name: 'cmsis' }
+        //Depends { name: 'cmsis' }
         
         stm32.includePaths: [ FileInfo.joinPaths(exportingProduct.sourceDirectory, '/printf') ]
         stm32.libraryPaths: [ exportingProduct.destinationDirectory, exportingProduct.sourceDirectory ]
